@@ -1,0 +1,22 @@
+{
+    "name": "yaecho/db-diff",
+    "description": "mysql databases diff tools",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "yaecho",
+            "email": "root@yaecho.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yaecho/file": "dev-master",
+        "catfan/medoo": "v1.5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yaecho\\Mysql\\" : "Mysql/"
+        }
+    }
+}
