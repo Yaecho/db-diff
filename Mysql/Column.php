@@ -146,4 +146,18 @@ class Column extends Common
         $props   = $reflect->getProperties(\ReflectionProperty::IS_PRIVATE);
         return $props;
     }
+
+    /**
+     * 获取构建列SQL
+     *
+     * @return string
+     * @author Yaecho 
+     */
+    public function getCreateSql(string $tableName)
+    {
+        $str = "ALTER TABLE `$tableName` ADD $this->field $this->type ";
+        $str .= $this->isNull ? "NULL" : "NOT NULL";
+        $str .= " DEFAULT '$this->default' COMMENT '$this->comment'";
+        return $str;
+    }
 }
