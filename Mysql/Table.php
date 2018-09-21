@@ -110,6 +110,7 @@ class Table extends Common
             } else {
                 $temp = $column->diff($target->columns[$key]);
                 if (!empty($temp)) {
+                    $temp['__column'] = $column;
                     $res[$key] = $temp;
                 }
             }
