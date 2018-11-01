@@ -160,4 +160,18 @@ class Column extends Common
         $str .= " DEFAULT '$this->default' COMMENT '$this->comment'";
         return $str;
     }
+
+    /**
+     * 获取修改列SQL
+     *
+     * @return string
+     * @author Yaecho 
+     */
+    public function getUpdateSql(string $tableName)
+    {
+        $str = "ALTER TABLE `$tableName` MODIFY $this->field $this->type ";
+        $str .= $this->isNull ? "NULL" : "NOT NULL";
+        $str .= " DEFAULT '$this->default' COMMENT '$this->comment'";
+        return $str;
+    }
 }

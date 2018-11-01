@@ -29,7 +29,7 @@ class Table extends Common
     /**
      * 数据库操作类
      *
-     * @var \Medoo\Medoo
+     * @var \Yaecho\Mysql\Driver\Mysqli
      * @author Yaecho 
      */
     private $db = null;
@@ -70,7 +70,7 @@ class Table extends Common
             $this->$prop = $data[ucfirst($prop)];
         }
 
-        $data = $this->db->query("show full columns from `{$this->name}`;")->fetchAll();
+        $data = $this->db->query("show full columns from `{$this->name}`;");
 
         $this->columnNum = count($data);
 
@@ -88,7 +88,7 @@ class Table extends Common
      */
     public function getCreateSql()
     {
-        $data = $this->db->query("show create table `{$this->name}`;")->fetchAll();
+        $data = $this->db->query("show create table `{$this->name}`;");
         return reset($data)['Create Table'];
     }
 
@@ -110,6 +110,7 @@ class Table extends Common
             } else {
                 $temp = $column->diff($target->columns[$key]);
                 if (!empty($temp)) {
+                    $temp['__column'] = $column;
                     $res[$key] = $temp;
                 }
             }

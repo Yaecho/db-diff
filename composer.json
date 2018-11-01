@@ -11,8 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "yaecho/file": "dev-master",
-        "catfan/medoo": "v1.5.7"
+        "yaecho/file": "dev-master"
     },
     "autoload": {
         "psr-4": {

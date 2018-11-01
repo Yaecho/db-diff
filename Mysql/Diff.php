@@ -61,8 +61,12 @@ class Diff extends Common
                         $str .= $column->getCreateSql($tableName) . PHP_EOL;
                     } elseif (is_array($column)) {
                         foreach($column as $propName => $prop) {
+                            if ($propName == '__column') {
+                                continue;
+                            }
                             $str .= "--属性{$propName}应该是$prop" . PHP_EOL;
                         }
+                        $str .= $column['__column']->getUpdateSql($tableName) . PHP_EOL;
                     }
                 }
             }
