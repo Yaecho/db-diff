@@ -2,7 +2,7 @@
 namespace Yaecho\Mysql;
 
 use Yaecho\Mysql\Common\Common;
-use Medoo\Medoo;
+use Yaecho\Mysql\Driver\Mysqli;
 
 class Database extends Common
 {
@@ -23,7 +23,7 @@ class Database extends Common
     /**
      * 数据库操作类
      *
-     * @var \Medoo\Medoo $db
+     * @var \Yaecho\Mysql\Driver\Mysqli
      * @author Yaecho 
      */
     private $db = null;
@@ -40,8 +40,8 @@ class Database extends Common
 
     public function init($config = [])
     {
-        $option = ['database_type' => 'mysql'];
-        $rel = ['database_name' => 'dbName', 'server' => 'host', 'username', 'password', 'charset', 'port'];
+        $option = [];
+        $rel = ['db' => 'dbName', 'host', 'username', 'password', 'charset', 'port'];
 
         foreach ($rel as $key => $value) {
             if (is_int($key)) {
@@ -54,12 +54,12 @@ class Database extends Common
             }
         }
         
-        $this->db = new Medoo($option);
+        $this->db = Mysqli::getInstance($option);
     }
 
     public function load()
     {
-        $data = $this->db->query("show table status;")->fetchAll();
+        $data = $this->db->query("show table status;");
 
         $this->tableNum = count($data);
 
